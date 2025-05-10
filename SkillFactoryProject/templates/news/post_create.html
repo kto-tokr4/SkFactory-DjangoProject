@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Новое объявление{% endblock %}
+
+{% block content %}
+    <div class="post_info">
+        <h2>Новое объявление</h2>
+        <form method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input type="submit" value="Создать"></p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <li class="sidebar_item"><a href="{% url "news:post_list" %}">К доске объявлений</a></li>
+{% endblock %}

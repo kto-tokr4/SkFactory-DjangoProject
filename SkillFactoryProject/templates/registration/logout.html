@@ -1,0 +1,11 @@
+{% extends "base_account.html" %}
+{% block title %}Выход{% endblock %}
+{% block main %}
+    <div class="reg_group">
+        <h1>Выход из системмы</h1>
+            <p>
+                Вы успешно вышли из системы
+                Вы можете повторно авторизироваться, перейдя по <a href="{% url "account:login" %}">ссылке</a>.
+            </p>
+    </div>
+{% endblock %}

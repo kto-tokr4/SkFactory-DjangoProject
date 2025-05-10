@@ -1,0 +1,27 @@
+{% extends "base_account.html" %}
+
+{% block title %}Вход в систему{% endblock %}
+
+
+{% block main %}
+
+    <div class="reg_group">
+        <h1>Авторизация</h1>
+        {% if form.errors %}
+            <p>
+                В ходе авторизации возникла проблема. <br/>
+                Пожалуйста, повторите попытку еще раз.
+            </p>
+        {% else %}
+            <p>Используйте предложенную форму, чтобы войти в свой аккаунт:</p>
+            <div class="login-form">
+                <form method="post" action="{% url 'account:login' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <p><input type="submit" value="Авторизация"></p>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

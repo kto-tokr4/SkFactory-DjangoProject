@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+    <h1>Ваш профиль:</h1>
+    {% for post in posts %}
+         <div class="post_info">
+            <h1 class="post_title"><a href="{{ post.get_absolute_url_for_profile }}">{{ post.title }}</a></h1>
+            <p class="post_category">Категория: {{ post.get_category_display }}</p>
+            <p class="post_author">Дата публикации: {{ post.created|date:"d m Y" }}</p>
+            <p class="post_content">{{ post.content|safe|linebreaks|truncatewords:35 }}</p>
+            <p>Количество комментариев: {{ post.comments.count }}</p>
+        </div>
+    {% empty %}
+        <p>Нет данных</p>
+    {% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+    <li class="sidebar_item"><a href="{% url "news:post_list" %}">К доске объявлений</a></li>
+{% endblock %}

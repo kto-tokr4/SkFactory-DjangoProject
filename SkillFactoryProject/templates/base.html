@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static "css/styles.css" %}" rel="stylesheet" type="text/css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<nav class="header">
+    {% if request.user.is_authenticated %}
+        <ul class="nav_list">
+            <li class="nav_item">
+                <p>Добро пожаловать {{ request.user.first_name|default:request.user.username }}</p>
+            </li>
+            <li class="nav_item"><a href="{% url "news:profile" %}">Профиль</a></li>
+            <li class="nav_item">
+                <form method="post" action="{% url "account:logout" %}">{% csrf_token %}<input type="submit"
+                                                                                               value="Выход"></form>
+            </li>
+        </ul>
+    {% else %}
+        <ul class="nav_list">
+            <li class="nav_item">
+                <a href="{% url 'account:login' %}">Войти в аккаунт</a> || <a href="{% url "account:register" %}">Регистрация</a>
+            </li>
+        </ul>
+    {% endif %}
+</nav>
+<main class="content">
+    {% block content %}{% endblock %}
+</main>
+<aside class="sidebar">
+    <ul class="sidebar_list">
+        {% block sidebar %}{% endblock %}
+    </ul>
+</aside>
+<footer class="footer">
+    <p>Итоговое практическое задание от SkillFactory</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "base_account.html" %}
+
+{% block title %}Регистрация {% endblock %}
+
+{% block main %}
+    <div class="reg_group">
+        <h1>Регистрация</h1>
+        <p>Чтобы зарегистрироваться на сайте, воспользуйтесь формой ниже</p>
+        <a href="{% url "account:login" %}">Войти в аккаунт</a>
+        <form method="post" class="reg_form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Регистрация">
+        </form>
+    </div>
+{% endblock %}

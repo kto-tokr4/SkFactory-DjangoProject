@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="post_info">
+        <h2 class="post_title">{{ post.title }}</h2>
+        {% for comment in comments %}
+            <p>Комментарий: {{ comment.content }}</p>
+            <p>Автор: {{ comment.author.user.username|default:comment.author.user.first_name }}</p>
+            <p>Дата создания: {{ comment.created|date:"d m Y" }}</p>
+            {% if comment.active == True %}
+                <p>Комментарий опубликован</p>
+            {% else %}
+                <p>Вы пока что не опубликовали данный комментарий</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                    <input type="submit" value="Опубликовать">
+                </form>
+            {% endif %}
+        {% empty %}
+            <h2>У вашего поста пока нет комментариев</h2>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <li class="sidebar_item"><a href="{% url "news:post_list" %}">К доске объявлений</a></li>
+{% endblock %}

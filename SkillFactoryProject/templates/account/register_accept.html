@@ -1,0 +1,16 @@
+{% extends "base_account.html" %}
+
+{% block title %}Регистрация {% endblock %}
+
+{% block main %}
+    <div class="reg_group">
+        <h1>Подтвердите регистрацию</h1>
+        <p>На указанный вами адрес электронной почты был выслан код подтверждения регистрации</p>
+        <p>Введите полученный код в форму ниже</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input type="submit" value="Отправить"></p>
+        </form>
+    </div>
+{% endblock %}
